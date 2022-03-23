@@ -51,4 +51,12 @@ resource "aws_iam_role_policy_attachment" "apiops-aws-mkp-subscriptions-execute"
   policy_arn = aws_iam_policy.apiops-aws-mkp-subscriptions.arn
   role       = aws_iam_role.apiops-aws-mkp-subscriptions.name
 }
+
+resource "aws_lambda_permission" "apiops-aws-mkp-subscriptions" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.apiops-aws-mkp-subscriptions.arn
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "arn:aws:execute-api:${var.aws_region}:${var.aws_account_id}:*/*"
+}
 # --------------- End Role --------------------

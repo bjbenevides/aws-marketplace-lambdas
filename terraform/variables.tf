@@ -18,3 +18,8 @@ variable "aws_profile" {
   default = "pessoal"
 }
 
+variable "aws_account_id" {
+  type    = number
+  default = 954481883581
+}
+
